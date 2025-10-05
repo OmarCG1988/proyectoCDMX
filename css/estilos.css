@@ -1,0 +1,174 @@
+/* ===================================================================
+   ESTILOS (CSS)
+   Descripción general:
+   - Define el estilo visual de la aplicación: tipografías, colores, layout
+     del cabecero, formulario y listados.
+   - Usa variables CSS para colores principales y sombras suaves.
+   =================================================================== */
+
+/* ====== Reset / Base ====== */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif; }
+:root {
+  --verde: #2ecc71;   /* Color principal para valores positivos */
+  --rojo:  #e74c3c;   /* Color principal para valores negativos */
+  --gris:  #f4f6f8;   /* Fondo base neutro */
+  --texto: #2c3e50;   /* Color del texto principal */
+  --borde: rgba(0,0,0,.06); /* Borde suave para tarjetas y campos */
+}
+
+body { background: var(--gris); color: var(--texto); }
+
+/* ====== Cabecero: bloque superior con totales ====== */
+.cabecero {
+  background: linear-gradient(180deg, #111827, #1f2937); /* Degradado oscuro */
+  color: #fff;
+  padding: 2rem 1rem 3rem;
+  border-bottom: 1px solid #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.presupuesto {
+  max-width: 980px;   /* Limita el ancho del contenido */
+  margin: 0 auto;
+}
+
+.presupuesto_titulo {
+  font-size: 1rem;
+  opacity: .8;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.presupuesto_valor {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: .25rem 0 1rem;
+}
+
+.presupuesto_ingreso,
+.presupuesto_egreso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  padding: .75rem 1rem;
+  margin-top: .5rem;
+}
+
+.presupuesto_ingreso--texto,
+.presupuesto_egreso--texto { font-weight: 600; }
+
+.presupuesto_ingreso--valor { color: var(--verde); font-weight: 700; }
+.presupuesto_egreso--valor { color: var(--rojo);  font-weight: 700; }
+
+.presupuesto_ingreso--porcentaje,
+.presupuesto_egreso--porcentaje {
+  display: inline-block;
+  min-width: 64px;
+  text-align: right;
+  opacity: .9;
+}
+
+/* Utilidades de alineación */
+.derecha { display: flex; gap: .75rem; align-items: center; }
+.limpiarEstilos::after { content: ""; display: block; clear: both; }
+
+/* ====== Formulario de captura ====== */
+.agregar {
+  max-width: 980px;
+  margin: -1.5rem auto 1.5rem; /* Se superpone ligeramente al cabecero */
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: .75rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+.agregar_contenedor {
+  display: grid;
+  grid-template-columns: 90px 1fr 160px 56px; /* tipo | descripción | valor | botón */
+  gap: .5rem;
+}
+
+.agregar_tipo,
+.agregar_descripcion,
+.agregar_valor {
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+  padding: 0 .75rem;
+  outline: none;
+}
+
+.agregar_tipo { text-align: center; font-weight: 700; }
+
+.agregar_btn {
+  height: 42px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .06s ease, box-shadow .2s ease;
+}
+
+.agregar_btn:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgba(0,0,0,.06); }
+.agregar_btn:active { transform: translateY(0); }
+
+/* ====== Contenido principal: columnas de listas ====== */
+.contenedor {
+  max-width: 980px;
+  margin: 0 auto 4rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ingreso, .egreso {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+.ingreso_titulo, .egreso_titulo {
+  margin: .25rem 0 1rem;
+  font-size: 1.1rem;
+}
+
+/* ====== Items de lista ====== */
+#lista-ingresos, #lista-egresos { display: grid; gap: .5rem; }
+
+.elemento {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: .5rem .75rem;
+}
+
+.elemento_descripcion { font-weight: 500; }
+
+.elemento_valor { font-weight: 700; }
+.ingreso .elemento_valor { color: var(--verde); }
+.egreso  .elemento_valor { color: var(--rojo);  }
+
+.elemento_porcentaje {
+  opacity: .75;
+  min-width: 64px;
+  text-align: right;
+}
+
+.elemento_eliminar_btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: .25rem;
+}

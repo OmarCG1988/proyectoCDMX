@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aplicación de Presupuesto</title>
+  <!--
+    DESCRIPCIÓN (HTML)
+    - Este documento define la estructura de la Aplicación de Presupuesto.
+    - Incluye un cabecero con totales (presupuesto, ingresos, egresos y %),
+      un formulario para capturar movimientos y dos contenedores para listar
+      ingresos y egresos.
+    - El CSS se carga desde estilos.css y la lógica desde app.js.
+  -->
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body onload="cargarApp()">
+  <!--
+    Sección: Cabecero
+    Muestra el presupuesto disponible y los totales de ingresos/egresos.
+    Los elementos con id se actualizan dinámicamente desde app.js (cargarCabecero).
+  -->
+  <div class="cabecero">
+    <div class="presupuesto">
+      <div class="presupuesto_titulo">Presupuesto Disponible</div>
+      <div class="presupuesto_valor" id="presupuesto">+0.00</div>
+
+      <div class="presupuesto_ingreso limpiarEstilos">
+        <div class="presupuesto_ingreso--texto">Ingresos</div>
+        <div class="derecha">
+          <div class="presupuesto_ingreso--valor" id="ingresos">+0.00</div>
+          <div class="presupuesto_ingreso--porcentaje">&nbsp;</div>
+        </div>
+      </div>
+
+      <div class="presupuesto_egreso limpiarEstilos">
+        <div class="presupuesto_egreso--texto">Egresos</div>
+        <div class="derecha limpiarEstilos">
+          <div class="presupuesto_egreso--valor" id="egresos">-0.00</div>
+          <div class="presupuesto_egreso--porcentaje" id="porcentaje">0%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    Sección: Formulario de captura
+    - El select "tipo" define si el movimiento es ingreso (+) o egreso (-).
+    - "descripcion" y "valor" son los campos de entrada validados en app.js.
+    - El botón ejecuta la función agregarDato() que agrega el movimiento
+      y recalcula totales.
+  -->
+  <form id="forma" class="agregar" onsubmit="return false;">
+    <div class="agregar_contenedor">
+      <select class="agregar_tipo" id="tipo">
+        <option value="ingreso" selected>+</option>
+        <option value="egreso">-</option>
+      </select>
+
+      <input
+        type="text"
+        class="agregar_descripcion"
+        id="descripcion"
+        placeholder="Agregar Descripción"
+      />
+
+      <input
+        type="number"
+        class="agregar_valor"
+        id="valor"
+        placeholder="valor"
+        step="any"
+      />
+
+      <button type="button" class="agregar_btn" onclick="agregarDato()" title="Agregar movimiento">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </button>
+    </div>
+  </form>
+
+  <!--
+    Sección: Listas de movimientos
+    - Dos columnas: una para ingresos y otra para egresos.
+    - Los divs con id "lista-ingresos" y "lista-egresos" se llenan dinámicamente
+      con HTML desde app.js (cargarIngresos, cargarEgresos).
+  -->
+  <div class="contenedor limpiarEstilos">
+    <div class="ingreso">
+      <h2 class="ingreso_titulo">Ingresos</h2>
+      <div id="lista-ingresos"></div>
+    </div>
+
+    <div class="egreso">
+      <h2 class="egreso_titulo">Egresos</h2>
+      <div id="lista-egresos"></div>
+    </div>
+  </div>
+
+  <!-- Ionicons: librería de iconos para los botones -->
+  <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- Lógica de la app -->
+  <script src="app.js"></script>
+</body>
+</html>
