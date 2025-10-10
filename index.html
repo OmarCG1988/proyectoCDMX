@@ -4,17 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aplicación de Presupuesto</title>
-  <!--
-    DESCRIPCIÓN (HTML)
-    - Este documento define la estructura de la Aplicación de Presupuesto.
-    - Incluye un cabecero con totales (presupuesto, ingresos, egresos y %),
-      un formulario para capturar movimientos y dos contenedores para listar
-      ingresos y egresos.
-    - El CSS se carga desde estilos.css y la lógica desde app.js.
-  -->
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
-<body onload="cargarApp()">
+<body id="autoid-1">
   <!--
     Sección: Cabecero
     Muestra el presupuesto disponible y los totales de ingresos/egresos.
@@ -50,7 +42,7 @@
     - El botón ejecuta la función agregarDato() que agrega el movimiento
       y recalcula totales.
   -->
-  <form id="forma" class="agregar" onsubmit="return false;">
+  <form id="forma" class="agregar">
     <div class="agregar_contenedor">
       <select class="agregar_tipo" id="tipo">
         <option value="ingreso" selected>+</option>
@@ -72,7 +64,7 @@
         step="any"
       />
 
-      <button type="button" class="agregar_btn" onclick="agregarDato()" title="Agregar movimiento">
+      <button id="btn-agregar" type="button" class="agregar_btn" title="Agregar movimiento">
         <ion-icon name="checkmark-circle-outline"></ion-icon>
       </button>
     </div>
@@ -101,6 +93,7 @@
   <script nomodule src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
 
   <!-- Lógica de la app -->
+
   <script src="js/app.js"></script>
 </body>
 </html>

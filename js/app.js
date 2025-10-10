@@ -1,11 +1,29 @@
+/**
+ * main.js — Proyecto Presupuesto (versión unificada y legible)
+ * Contiene:
+ *  1) Clases del dominio: Dato, Ingreso, Egreso
+ *  2) Lógica de la aplicación (antes en app.js)
+ *  3) Enlaces de eventos y bootstrap (antes en _autobind.js + onload)
+ * 
+ * Notas:
+ *  - Valores base: Ingreso 'Salario' = 5000; Egreso 'Renta' = 500.
+ *  - Se usan addEventListener y DOMContentLoaded; no hay eventos inline en HTML.
+ */
+'use strict';
+
+// ====== CLASES ======
+
+
+
+
+
+
+// ====== APLICACIÓN ======
 /* ===================================================================
-   LÓGICA (JavaScript)
    Descripción general:
    - Define clases base (Dato) y derivadas (Ingreso, Egreso).
    - Mantiene arreglos (ingresos, egresos) que inician vacíos.
-   - Proporciona funciones para formatear, calcular totales, renderizar
-     la interfaz y manejar eventos (agregar/eliminar).
-   - Todas las funciones clave incluyen comentarios descriptivos.
+   - Proporciona funciones para formatear, calcular totales, renderizar y manejar eventos (agregar/eliminar).
    =================================================================== */
 
 // ====== Clases de dominio ======
@@ -59,8 +77,8 @@ class Egreso extends Dato {
 
 // ====== Estado inicial ======
 // Arreglos vacíos: la app inicia en 0 sin valores de entrada.
-let ingresos = [];
-let egresos  = [];
+let ingresos = [ new Ingreso('Salario', 5000) ];
+let egresos = [ new Egreso('Renta', 500) ];
 
 // ====== Utilidades de formato ======
 
@@ -281,3 +299,23 @@ const cargarApp = () => {
   cargarIngresos();
   cargarEgresos();
 };
+
+// Asegura render al iniciar
+window.addEventListener('DOMContentLoaded', cargarApp);
+
+
+
+// ====== EVENTOS Y BOOTSTRAP ======
+(function initBindings(){
+  document.addEventListener('DOMContentLoaded', () => {
+    // Enlazar botón agregar (si existe)
+    const btnAgregar = document.getElementById('btn-agregar');
+    if (btnAgregar && typeof agregarDato === 'function') {
+      btnAgregar.addEventListener('click', agregarDato);
+    }
+    // Render inicial
+    if (typeof cargarApp === 'function') {
+      cargarApp();
+    }
+  });
+})();
